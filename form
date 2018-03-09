@@ -1,0 +1,50 @@
+<html>
+<head>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+    <script>
+    var frm = $('#mf');
+    frm.submit(function(e){
+        alert("ciao");
+        e.preventDefault();
+
+        /* controllo campi */
+
+        /* se input male */
+        //e.stopImmediatePropagation();
+
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+
+            success:function(data){
+                alert('success');
+                alert(JSON.strigify(data));
+                $(location).attr('href','Lavoro/user.html');
+            },
+
+            error:function(data){
+                alert('error');
+                alert(JSON.strigify(data));
+            }
+        });
+    });
+</script>
+
+</head>
+
+
+<body>
+<div id="cont">
+    <form id="mf" name="mform" action="https://jsonplaceholder.typicode.com/users" method="POST">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="submit" name="login">
+    </form>
+</div>
+</body>
+</html>
